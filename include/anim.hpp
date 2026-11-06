@@ -1,6 +1,7 @@
 #pragma once
 
 #include "types.hpp"
+#include <iterator>
 
 /// Animation names
 static StringView AnimationNames[] = {
@@ -1962,7 +1963,7 @@ static struct AnimationLookup
 
 	AnimationLookup()
 	{
-		for (int i = 1 /* skip animation 0 since it's invalid */; i < GLM_COUNTOF(AnimationNames); ++i)
+		for (int i = 1 /* skip animation 0 since it's invalid */; i < std::size(AnimationNames); ++i)
 		{
 			valid.emplace(Impl::String(AnimationNames[i]));
 		}
@@ -1976,7 +1977,7 @@ static struct AnimationLibraryLookup
 
 	AnimationLibraryLookup()
 	{
-		for (int i = 0; i < GLM_COUNTOF(AnimLibs); ++i)
+		for (int i = 0; i < std::size(AnimLibs); ++i)
 		{
 			valid.emplace(Impl::String(AnimLibs[i]));
 		}
@@ -1985,7 +1986,7 @@ static struct AnimationLibraryLookup
 
 inline Pair<StringView, StringView> splitAnimationNames(int ID)
 {
-	if (ID <= 0 || ID >= GLM_COUNTOF(AnimationNames))
+	if (ID <= 0 || ID >= std::size(AnimationNames))
 	{
 		return { "", "" };
 	}
